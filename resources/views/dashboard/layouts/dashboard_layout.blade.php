@@ -50,6 +50,7 @@
                         <span class="fe fe-grid fe-16"></span>
                     </a>
                 </li>
+
                 <li class="nav-item nav-notif">
                     <a class="nav-link text-muted my-2" href="./#" data-toggle="modal" data-target=".modal-notif">
                         <span class="fe fe-bell fe-16"></span>
@@ -65,9 +66,17 @@
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Profile</a>
+                        {{-- check user auth --}}
+                        @auth
+                            <a class="dropdown-item" href="#">{{ Auth::user()->name }}</a>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button class="dropdown-item btn">Logout</button>
+                            </form>
+                        @endauth
+                        {{-- <a class="dropdown-item" href="#">Profile</a>
                         <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="#">Activities</a>
+                        <a class="dropdown-item" href="#">Activities</a> --}}
                     </div>
                 </li>
             </ul>
@@ -77,7 +86,7 @@
                 data-toggle="toggle">
                 <i class="fe fe-x"><span class="sr-only"></span></i>
             </a>
-            @include('dashboard.layouts.partials.nav',["active" => "dashboard"])
+            @include('dashboard.layouts.partials.nav', ['active' => 'dashboard'])
         </aside>
         <main role="main" class="main-content">
             <div class="container-fluid">
@@ -88,9 +97,9 @@
                     <div class="col col-sm-6">
                         <ol class="breadcrumb bg-transparent">
                             @section('breadcrumb')
-                            <li class="breadcrumb-item">
-                                <a href="#">Home </a>
-                            </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#">Home </a>
+                                </li>
                             @show
                         </ol>
                     </div>
