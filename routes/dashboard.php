@@ -14,8 +14,25 @@ require __DIR__.'/dashboard.php';
 
 */
 
-Route::get('/dashboard', [DashboardController::class, "index"])
-->middleware(['auth', 'verified'])
-->name('dashboard');
 
-Route::resource('dashboard/categories',CategoriesController::class);
+
+Route::group([
+    'middleware' => ['auth'],
+    'as' => 'dashboard.', // dashboard. هتبدأ ب routes name كل اسماء
+    'prefix' => 'dashboard',
+], function () {
+    Route::get('/', [DashboardController::class, "index"])
+        ->name('dashboard');
+
+    /*
+     بتكريت لي 7 راواتس resource
+        index
+        create
+        store
+        show
+        edit
+        update
+        destroy
+    */
+    Route::resource('/categories', CategoriesController::class);
+});

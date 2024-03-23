@@ -13,7 +13,7 @@
         <div class="card shadow">
             <div class="card-body">
                 <h5 class="card-title">Table head options</h5>
-                <a href="{{ route('categories.create') }}" class="btn text-white btn-sm btn-primary mb-5">create</a>
+                <a href="{{ route('dashboard.categories.create') }}" class="btn text-white btn-sm btn-primary mb-5">create</a>
                 <tbody>
                     @if (session()->has('success'))
                         <div class="alert alert-success text-center">
@@ -42,12 +42,12 @@
                                         <td>{{ $category->parent_id }}</td>
                                         <td>{{ $category->created_at }}</td>
                                         <td>
-                                            <a href="{{ route('categories.edit', $category->id) }}"
+                                            <a href="{{ route('dashboard.categories.edit', $category->id) }}"
                                                 class="btn btn-sm btn-success">Edit</a>
                                         </td>
                                         <td>
 
-                                            <form action="{{ route('categories.destroy', $category->id) }}" method="post">
+                                            <form action="{{ route('dashboard.categories.destroy', $category->id) }}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>
