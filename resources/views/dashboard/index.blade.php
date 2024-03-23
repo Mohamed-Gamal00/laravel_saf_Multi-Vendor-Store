@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.dashboard_layout')
+@extends('layouts.dashboard_layout')
 
 
 @section('title','Starter page')

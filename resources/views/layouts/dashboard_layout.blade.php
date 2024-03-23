@@ -86,7 +86,7 @@
                 data-toggle="toggle">
                 <i class="fe fe-x"><span class="sr-only"></span></i>
             </a>
-            @include('dashboard.layouts.partials.nav', ['active' => 'dashboard'])
+            @include('layouts.partials.nav', ['active' => 'dashboard'])
         </aside>
         <main role="main" class="main-content">
             <div class="container-fluid">
