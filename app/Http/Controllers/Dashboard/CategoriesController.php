@@ -41,6 +41,7 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(Category::rules());
 
         // request merge
         $request->merge([
@@ -89,11 +90,17 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        $request->validate(Category::rules($id));
+
         $category = Category::find($id);
 
         $old_Image = $category->image;
         $data = $request->except('image');
-        $data['image'] = $this->uploadImage($request);
+        $new_image = $this->uploadImage($request);
+        if($new_image) {
+            $data['image'] = $new_image;
+        }
         // if($request->hasFile('image')) {
         //     $file = $request->file('image'); // uploadFile object
         //     $path = $file->store('uploads',[
@@ -103,7 +110,7 @@ class CategoriesController extends Controller
         // }
 
         $category->update($data);
-        if($old_Image && $data['image']) {
+        if($old_Image && $new_image) {
             Storage::disk('public')->delete($old_Image);
         }
         return Redirect::route('dashboard.categories.index')->with('success', 'Category Updated success');
