@@ -1,14 +1,5 @@
 <div class="form-group">
-    <label for="name">Category Name</label>
-    <input type="text" id="name" @class([
-        'form-control',
-        'is-invalid' => $errors->has('name'),
-    ])
-     value="{{ old('name',$category->name) }}"
-        name="name">
-    @error('name')
-        <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
+    <x-form.input label="Category Name" name="name" id="Category Name" value="{{$category->name}}"/>
 </div>
 <div class="form-group">
     <label for="parent">Category Parent</label>
@@ -22,13 +13,18 @@
 </div>
 
 <div class="form-group">
-    <label for="desc">Description</label>
-    <textarea id="desc" name="description" class="form-control">{{ old('description',$category->description) }}</textarea>
+    <label for="">Description</label>
+    <x-form.textarea name="description" :vlaue="$category->description" />
+    {{-- <x-form.textarea name="description" label="description" labelTitle="Descreption" :vlaue="$category->description" /> --}}
+     {{-- <label for="desc">Description</label>
+    <textarea id="desc" name="description" class="form-control">{{ old('description',$category->description) }}</textarea> --}}
 </div>
 
 <div class="form-group">
-    <label for="image">Image</label>
-    <input type="file" id="image" name="image" class="form-control" accept="image/">
+    {{-- <label for="image">Image</label>
+     <input type="file" id="image" name="image" class="form-control" accept="image/"> --}}
+    <x-form.label id="image">Image</x-form.label>
+    <x-form.input type=file name="image"/>
     @if ($category->image)
         <img class="mt-2" src="{{ asset('storage/' . $category->image) }}" height="100" alt="img">
     @endif
@@ -36,7 +32,8 @@
 
 <div class="form-group mx-3">
     <label for="status">status</label>
-    <div class="form-check">
+    <x-form.radio name="status" :checked="$category->status" :options="['active'=>'Active','archived'=>'Archived']" />
+    {{-- <div class="form-check">
         <input class="form-check-input" type="radio" name="status" value="active" id="flexRadioDefault1"
             @checked(old('status',$category->status) == 'active')>
         <label class="form-check-label" for="flexRadioDefault1">
@@ -49,7 +46,7 @@
         <label class="form-check-label" for="flexRadioDefault2">
             Archived
         </label>
-    </div>
+    </div> --}}
 </div>
 <div class="form-group">
     <button type="submit" class="btn btn-primary">{{ $button_lable ?? 'save' }}</button>

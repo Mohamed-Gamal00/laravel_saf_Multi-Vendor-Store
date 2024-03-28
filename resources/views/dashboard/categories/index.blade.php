@@ -15,11 +15,7 @@
                 <h5 class="card-title">Table head options</h5>
                 <a href="{{ route('dashboard.categories.create') }}" class="btn text-white btn-sm btn-primary mb-5">create</a>
                 <tbody>
-                    @if (session()->has('success'))
-                        <div class="alert alert-success text-center">
-                            {{ session('success') }}
-                        </div>
-                    @endif
+                    <x-alert type="success" /> {{-- alert بستدعي كومبوننت اسمه  --}}
                     <table class="table table-hover">
                         <thead class="thead-dark">
                             <tr>
